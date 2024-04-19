@@ -71,7 +71,52 @@ make
 make install # may need sudo
 ```
 
-See the [installation notes](#installation-notes---linux-and-mac) if you run into issues
+## Getting Started
+
+Enable the extension (do this once in each database where you want to use it)
+
+```tsql
+CREATE EXTENSION vector;
+```
+
+## Testing extension 
+
+Create a vector column with 3 dimensions
+
+```sql
+CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3));
+```
+
+Insert vectors
+
+```sql
+INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
+```
+
+Get the nearest neighbors by L2 distance
+
+```sql
+SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
+```
+
+Also supports inner product (`<#>`) and cosine distance (`<=>`)
+
+Note: `<#>` returns the negative inner product since Postgres only supports `ASC` order index scans on operators
+
+## Give flowise user to superuser
+
+It is likely that from flowise you need to give privileges to the user we created during the first steps
+
+```sql
+alter user flowise with superuser;
+```
+
+Test and be patient, enjoy it
+
+For more information:
+
+PGVector repo: https://github.com/pgvector/pgvector
+Install Postgresql on Ubuntu: https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart#step-2-using-postgresql-roles-and-databases
 
 
 
