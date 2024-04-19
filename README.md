@@ -50,9 +50,9 @@ Run the next command on your Ubuntu machine:
 >
 
 Now you must find the path of the "pg_config_manual.h" file. To find the pg_config_manual.h file, you can use the find command as mentioned above. Once you have found the location of the file, you can browse or use it as needed in your development process.
->
->  sudo find / -name pg_config_manual.h
->
+```sh
+sudo find / -name pg_config_manual.h
+```
 
 The path that returned to me is: "/usr/include/postgresql/pg_config_manual.h". So, you must run the next command with your path:
 >
@@ -61,7 +61,17 @@ The path that returned to me is: "/usr/include/postgresql/pg_config_manual.h". S
 
 ## Install Pgvector 
 
+Compile and install the extension (supports Postgres 12+)
 
+```sh
+cd /tmp
+git clone --branch v0.6.2 https://github.com/pgvector/pgvector.git
+cd pgvector
+make
+make install # may need sudo
+```
+
+See the [installation notes](#installation-notes---linux-and-mac) if you run into issues
 
 
 
