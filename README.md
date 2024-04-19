@@ -22,3 +22,50 @@ The installation procedure created a user account called postgres that is associ
 >  sudo -i -u postgres
 >
 > psql
+
+Then, create a new user (Role) on PostgreSQL:
+
+>
+>  CREATE USER flowise WITH PASWORD 'yourpassword';
+>
+
+Then, create a new database:
+>
+>  createdb datavec;
+>
+
+At now, you should grant all privileges on database with the Flowise user:
+>
+>  GRANT ALL PRIVILEGES ON DATABASE datavec TO flowise;
+>
+
+
+Once the database is created, it is necessary to install the Postgresql developer packages
+
+## Install developer packages from PostgreSQL
+
+Run the next command on your Ubuntu machine:
+>
+>  sudo apt-get install postgresql-server-dev-all
+>
+
+Now you must find the path of the "pg_config_manual.h" file. To find the pg_config_manual.h file, you can use the find command as mentioned above. Once you have found the location of the file, you can browse or use it as needed in your development process.
+>
+>  sudo find / -name pg_config_manual.h
+>
+
+The path that returned to me is: "/usr/include/postgresql/pg_config_manual.h". So, you must run the next command with your path:
+>
+>  gcc -I/usr/include/postgresql -o pg_config_manual pg_config_manual.h
+>
+
+## Install Pgvector 
+
+
+
+
+
+
+
+
+
